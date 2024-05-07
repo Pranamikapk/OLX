@@ -1,36 +1,37 @@
 import { getAuth } from 'firebase/auth'
 import React, { useContext, useEffect } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
-import Create from './Pages/Create'
+import Create from './Components/Create/Create'
+import Login from './Components/Login/Login'
+import Signup from './Components/Signup/Signup'
 import Home from './Pages/Home'
-import Login from './Pages/Login'
-import Signup from './Pages/Signup'
 import ViewPost from './Pages/ViewPost'
 import { AuthContext, FirebaseContext } from './store/Context'
 import Post from './store/postContext'
 
 function App() {
-  
-    const {setUser} = useContext(AuthContext)
+    const {user,setUser} = useContext(AuthContext)
     const {firebase} = useContext(FirebaseContext)
     const auth = getAuth(firebase)
-
+   
     useEffect(()=>{
       auth.onAuthStateChanged((user)=>{
         setUser(user)
       })
-    })
+    },[setUser])
+
   return (
     <div>
+      {/* <button onClick={()=>setUser('user')}>Click</button> */}
       <Post>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/create" element={<Create />} />
-          <Route path="/view" element={<ViewPost />} />
+          <Route path="/signup" element={user ? <Navigate to='/'/>:<Signup />} />
+          <Route path="/login" element={user ? <Navigate to='/'/>:<Login />} />
+          <Route path="/create" element={user ? <Create /> : <Navigate to="/login"/> } />
+          <Route path="/view" element={user ? <ViewPost /> : <Navigate to="/login"/> } />
         </Routes>
       </BrowserRouter>
       </Post>

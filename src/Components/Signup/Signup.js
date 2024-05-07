@@ -19,32 +19,49 @@ export default function Signup() {
   const [passwordError,setPasswordError] = useState('')
   const {Firebase} = useContext(FirebaseContext)
 
+  const handleLogin = () =>{
+    navigate('/login')
+  }
+
+
   const handleSubmit = async(e) =>{
     e.preventDefault()
     let isValid = true
 
-    if(!/^[a-zA-Z]*$/.test(username)){
+    if(!username.trim()){
+      setUserNameError('Enter a Username');
+      isValid = false;
+    }else if(!/^[a-zA-Z]*$/.test(username)){
       setUserNameError('Username should contain letters only')
       isValid = false
     }else{
       setUserNameError('')
     }
 
-    if (!/\S+@\S+\.\S+/.test(email)) {
+    if (!email.trim()) {
+      setEmailError('Enter an Email address');
+      isValid = false;
+    }else if (!/\S+@\S+\.\S+/.test(email)) {
       setEmailError('Email address is invalid');
       isValid = false;
     } else {
-      setEmailError('');
+      setEmailError('Enter an Email Address');
     }
 
-    if (!/^\d{10}$/.test(phone)) {
+    if (!phone.trim()) {
+      setPhoneError('Enter a Phone Number');
+      isValid = false;
+    }else if (!/^\d{10}$/.test(phone)) {
       setPhoneError('Phone number should contain 10 digits');
       isValid = false;
     } else {
       setPhoneError('');
     }
 
-    if (password.length < 6) {
+    if (!password.trim()) {
+      setPasswordError('Enter a Password');
+      isValid = false;
+    }else if (password.length < 6) {
       setPasswordError('Password should be at least 6 characters long');
       isValid = false;
     } else {
@@ -87,6 +104,7 @@ export default function Signup() {
             name="name"
             defaultValue="John"
           />
+          {usernameError && <p className="error">{usernameError}</p>}
           <br />
           <label htmlFor="fname">Email</label>
           <br />
@@ -99,6 +117,7 @@ export default function Signup() {
             name="email"
             defaultValue="John"
           />
+           {emailError && <p className="error">{emailError}</p>}
           <br />
           <label htmlFor="lname">Phone</label>
           <br />
@@ -111,6 +130,7 @@ export default function Signup() {
             name="phone"
             defaultValue="Doe"
           />
+          {phoneError && <p className="error">{phoneError}</p>}
           <br />
           <label htmlFor="lname">Password</label>
           <br />
@@ -123,11 +143,12 @@ export default function Signup() {
             name="password"
             defaultValue="Doe"
           />
+           {passwordError && <p className="error">{passwordError}</p>}
           <br />
           <br />
           <button>Signup</button>
         </form>
-        <a>Login</a>
+        <a onClick={handleLogin}>Login</a>
       </div>
     </div>
   );

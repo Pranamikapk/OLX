@@ -1,53 +1,58 @@
+/* Styles for the parent container */
 .viewParentDiv {
   padding-top: 4em;
   display: flex;
-  overflow: hidden;
+  justify-content: space-between; /* Distribute items evenly along the main axis */
+  align-items: flex-start; /* Align items to the start of the cross axis */
 }
+
+/* Styles for the image display section */
 .viewParentDiv .imageShowDiv {
   padding: 16px;
-  width: 70vw;
+  width: 40%; /* Adjust width for the image display */
   overflow: hidden;
 }
+
 .viewParentDiv .imageShowDiv img {
-  width: 100%;
+  max-width: 100%; /* Set maximum width to ensure responsiveness */
   height: auto;
+  margin-left: 100px; /* Move image to the right */
 }
 
+/* Styles for the right section containing product and contact details */
 .viewParentDiv .rightSection {
-  padding: 16px;
-  margin-top: 3em;
-  width: 30vw;
-  overflow: hidden;
+  padding: 10px;
+  width: 50%; /* Adjust width for the details section */
+  margin-top: 50px;
 }
 
-.viewParentDiv .rightSection .productDetails :first-child {
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: #002f34;
-  font-size: 34px;
-  line-height: 32px;
-  margin-bottom: 20px;
-}
-
+/* Styles for product details section */
 .viewParentDiv .rightSection .productDetails {
   border: 1px solid black;
-  padding: 6px;
+  padding: 19px; /* Reduce padding for smaller size */
   border-radius: 6px;
-  margin-bottom: 2em;
-  width: 100%;
+  margin-right: 465px;
 }
 
-.viewParentDiv .rightSection .contactDetails {
-  border: 1px solid black;
-  padding: 6px;
-  border-radius: 6px;
-}
-
-.viewParentDiv .rightSection .contactDetails :first-child {
-  font-size: 20px;
-  line-height: 24px;
+.viewParentDiv .rightSection .productDetails h2 {
   font-weight: 700;
   color: #002f34;
-  font-weight: 400;
-  padding: 0;
+  font-size: 20px; /* Decrease font size for headings */
+  margin-bottom: 8px;
+}
+
+/* Styles for contact details section */
+.viewParentDiv .rightSection .contactDetails {
+  border: 1px solid black;
+  padding: 19px; /* Reduce padding for smaller size */
+  border-radius: 6px;
+  margin-right: 465px;
+  margin-top: 20px;
+}
+
+.viewParentDiv .rightSection .contactDetails h2 {
+  font-size: 18px; /* Decrease font size for headings */
+  font-weight: 700;
+  color: #002f34;
+  margin-bottom: 6px;
 }

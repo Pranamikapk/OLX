@@ -34,7 +34,7 @@ function Posts() {
       <div className="moreView">
         <div className="heading">
           <span>Quick Menu</span>
-          <span>View more</span>
+          <span></span>
         </div>
         <div className="cards">
           {products && products.length > 0 &&

@@ -6,9 +6,9 @@ import OlxLogo from '../../assets/OlxLogo';
 import Search from '../../assets/Search';
 import SellButton from '../../assets/SellButton';
 import SellButtonPlus from '../../assets/SellButtonPlus';
+import { auth } from '../../firebase/config';
 import { AuthContext } from '../../store/Context';
 import './Header.css';
-import { auth } from '../../firebase/config';
 
 function Header() {
   const { user } = useContext(AuthContext);
@@ -40,13 +40,13 @@ function Header() {
           <Arrow></Arrow>
         </div>
         <div className="loginPage">
-          <span>{user ? `Welcome ${user.displayName}` : (
+          <span>{user ? `Welcome ${user.displayName || 'User'}` : (
             <span onClick={()=> navigate('/login')}>Login</span>
           )}</span>
           <hr />
         </div>
         <div className="logout">
-          {user && ( <span onClick={()=>{auth.signOut()
+          {user && (<span onClick={()=>{auth.signOut()
           navigate('/login')}}>
             Logout
             </span>
